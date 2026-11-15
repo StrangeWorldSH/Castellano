@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÉticaArgumenta — Estructura de la Argumentación Responsable y Ética</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#0B0B0F',
+                        graphite: '#14141B',
+                        elevated: '#1C1C26',
+                        electric: '#F59E0B',
+                        neoncyan: '#06B6D4',
+                        crimson: '#F43F5E'
+                    },
+                    fontFamily: {
+                        display: ['Bangers', 'cursive', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Bangers, Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Vistas exclusivas SPA */
+        .spa-view {
+            display: none;
+        }
+        .spa-view.active-view {
+            display: block;
+            animation: panelReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes panelReveal {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Acordeones sólidos con transición fluida */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        .accordion-content.open {
+            max-height: 950px;
+            opacity: 1;
+        }
+        .chevron-icon {
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .chevron-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Segmentos interactivos del Hilo Conductor en atmósfera oscura */
+        .discourse-segment {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom-width: 2px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+        .discourse-segment:hover {
+            filter: brightness(1.18);
+        }
+        .discourse-segment.active-segment {
+            box-shadow: 0 0 0 2.5px #F59E0B;
+            font-weight: 600;
+        }
+
+        /* Rotación continua del emblema dialéctico */
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spinSlow 45s linear infinite;
+            transform-origin: center;
+        }
+
+        /* Legibilidad optimizada para fuente Bangers */
+        .font-bangers-title {
+            font-family: 'Bangers', cursive, sans-serif;
+            letter-spacing: 0.045em;
+        }
+    </style>
+</head>
+<body class="bg-void text-zinc-100 font-sans antialiased min-h-screen flex flex-col selection:bg-electric selection:text-void">
+
+    <!-- ===================================================================== -->
+    <!-- BARRA DE NAVEGACIÓN SUPERIOR FIJA OSCURA SÓLIDA                       -->
+    <!-- ===================================================================== -->
+    <header class="sticky top-0 z-50 bg-graphite border-b-2 border-zinc-800 shadow-[0_8px_24px_rgba(0,0,0,0.75)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-18">
+
+                <!-- Logo con emblema de balanza y fuente Bangers -->
+                <button onclick="navigateTo('inicio')" class="flex items-center gap-3 text-left group focus:outline-none">
+                    <div class="w-10 h-10 rounded-xl bg-electric text-void flex items-center justify-center border-2 border-amber-300 shadow-[0_0_16px_rgba(245,158,11,0.35)] group-hover:scale-105 transition-transform">
+                        <i data-lucide="scale" class="w-5 h-5 stroke-[2.4]"></i>
+                    </div>
+                    <div>
+                        <span class="font-bangers-title text-2xl sm:text-[1.7rem] text-white block leading-none tracking-wider group-hover:text-electric transition-colors">
+                            ÉticaArgumenta
+                        </span>
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-neoncyan block mt-0.5">
+                            Guía Crítica y Retórica
+                        </span>
+                    </div>
+                </button>
+
+                <!-- Navegación Desktop (4 Vistas Exclusivas) -->
+                <nav class="hidden md:flex items-center gap-2 bg-void p-1.5 rounded-xl border border-zinc-800" aria-label="Navegación principal">
+                    <button data-nav="inicio" onclick="navigateTo('inicio')" class="nav-btn px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5">
+                        <i data-lucide="home" class="w-3.5 h-3.5"></i>
+                        Inicio
+                    </button>
+                    <button data-nav="elementos" onclick="navigateTo('elementos')" class="nav-btn px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5">
+                        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                        Los 8 Elementos
+                    </button>
+                    <button data-nav="hilo" onclick="navigateTo('hilo')" class="nav-btn px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                        Hilo Conductor
+                    </button>
+                    <button data-nav="taller" onclick="navigateTo('taller')" class="nav-btn px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5">
+                        <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                        Taller Práctico
+                    </button>
+                </nav>
+
+                <!-- Botón Menú Móvil -->
+                <div class="flex items-center gap-2">
+                    <span class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-elevated border border-zinc-700 font-mono text-[11px] font-semibold text-amber-400">
+                        <span class="w-2 h-2 rounded-full bg-electric"></span>
+                        MODO ARENA
+                    </span>
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Abrir menú de navegación" class="md:hidden p-2.5 rounded-xl bg-elevated border border-zinc-700 text-zinc-100 hover:border-electric transition-colors">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable Móvil Sólido -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-zinc-800 bg-graphite px-4 py-3 space-y-1.5">
+            <button data-nav="inicio" onclick="navigateTo('inicio'); toggleMobileMenu()" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition-all">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                Inicio (Portada)
+            </button>
+            <button data-nav="elementos" onclick="navigateTo('elementos'); toggleMobileMenu()" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition-all">
+                <i data-lucide="layers" class="w-4 h-4"></i>
+                Los 8 Elementos
+            </button>
+            <button data-nav="hilo" onclick="navigateTo('hilo'); toggleMobileMenu()" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition-all">
+                <i data-lucide="file-text" class="w-4 h-4"></i>
+                Hilo Conductor
+            </button>
+            <button data-nav="taller" onclick="navigateTo('taller'); toggleMobileMenu()" class="nav-btn w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition-all">
+                <i data-lucide="award" class="w-4 h-4"></i>
+                Taller Práctico
+            </button>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- CONTENEDOR PRINCIPAL DE LAS 4 VISTAS EXCLUSIVAS SPA                   -->
+    <!-- ===================================================================== -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <!-- ========================================================= -->
+        <!-- VISTA 1: INICIO / PORTADA                                 -->
+        <!-- ========================================================= -->
+        <section id="view-inicio" class="spa-view active-view">
+
+            <!-- Hero Oscuro Sólido con Composición Asimétrica -->
+            <div class="relative overflow-hidden rounded-3xl bg-graphite border-2 border-zinc-800 p-7 sm:p-11 lg:p-14 shadow-[0_24px_60px_rgba(0,0,0,0.8)] mb-12">
+                <!-- Acento superior sólido bicolor -->
+                <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-electric via-crimson to-neoncyan"></div>
+
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <!-- Columna Izquierda: Titular Bangers + Texto Plus Jakarta Sans -->
+                    <div class="lg:col-span-8">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-elevated border border-amber-500/40 text-electric font-bangers-title text-sm sm:text-base tracking-widest uppercase mb-5">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-electric"></i>
+                            Comunicación Crítica y Ciudadanía
+                        </div>
+
+                        <h1 class="font-bangers-title text-4xl sm:text-6xl lg:text-[4.15rem] text-white leading-[1.03] mb-6 drop-shadow-[0_4px_0_rgba(0,0,0,0.9)]">
+                            Estructura de la <span class="text-electric">Argumentación</span> Responsable y <span class="text-neoncyan">Ética</span>
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-2xl mb-8">
+                            Argumentar con ética significa defender nuestras ideas mediante evidencias verificables, respeto mutuo y rigor lógico, evitando la manipulación emocional o las falacias. Explora paso a paso los 8 componentes esenciales de todo discurso responsable.
+                        </p>
+
+                        <!-- Botones de Acción Sólidos de Alto Contraste -->
+                        <div class="flex flex-wrap items-center gap-4 mb-9">
+                            <button onclick="navigateTo('elementos')" class="px-6 py-3.5 rounded-xl bg-electric hover:bg-amber-400 text-void font-bold text-sm sm:text-base shadow-[0_6px_0_#92400E] active:translate-y-0.5 transition-all flex items-center gap-2.5">
+                                Comenzar recorrido
+                                <i data-lucide="arrow-right" class="w-4 h-4 stroke-[2.5]"></i>
+                            </button>
+                            <button onclick="navigateTo('hilo')" class="px-6 py-3.5 rounded-xl bg-elevated hover:bg-zinc-800 border-2 border-neoncyan/60 text-neoncyan font-bold text-sm sm:text-base transition-all flex items-center gap-2">
+                                <i data-lucide="book-open" class="w-4 h-4"></i>
+                                Ver ejemplo completo
+                            </button>
+                        </div>
+
+                        <!-- Indicadores Estructurales Sólidos -->
+                        <div class="pt-6 border-t border-zinc-800 grid grid-cols-3 gap-4 max-w-lg">
+                            <div class="bg-void p-3.5 rounded-xl border border-zinc-800">
+                                <span class="font-bangers-title text-3xl sm:text-4xl text-electric block leading-none">08</span>
+                                <span class="text-xs text-zinc-400 font-semibold mt-1 block">Elementos clave</span>
+                            </div>
+                            <div class="bg-void p-3.5 rounded-xl border border-zinc-800">
+                                <span class="font-bangers-title text-3xl sm:text-4xl text-neoncyan block leading-none">01</span>
+                                <span class="text-xs text-zinc-400 font-semibold mt-1 block">Discurso modelo</span>
+                            </div>
+                            <div class="bg-void p-3.5 rounded-xl border border-zinc-800">
+                                <span class="font-bangers-title text-3xl sm:text-4xl text-crimson block leading-none">05</span>
+                                <span class="text-xs text-zinc-400 font-semibold mt-1 block">Retos prácticos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Emblema Dialéctico Geométrico de Alto Contraste -->
+                    <div class="lg:col-span-4 flex flex-col items-center justify-center">
+                        <div class="w-full max-w-xs aspect-square rounded-2xl bg-void border-2 border-zinc-800 p-6 flex flex-col items-center justify-between shadow-inner">
+                            <div class="w-full flex items-center justify-between font-mono text-[11px] font-bold uppercase tracking-widest text-zinc-400">
+                                <span class="text-electric">LOGOS</span>
+                                <span>•</span>
+                                <span class="text-neoncyan">ETHOS</span>
+                                <span>•</span>
+                                <span class="text-crimson">RIGOR</span>
+                            </div>
+
+                            <!-- SVG Geométrico Sólido de Alto Contraste -->
+                            <svg viewBox="0 0 220 220" class="w-44 h-44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="110" cy="110" r="94" stroke="#3F3F46" stroke-width="2" stroke-dasharray="6 4" class="animate-spin-slow"/>
+                                <circle cx="110" cy="110" r="70" stroke="#27272A" stroke-width="2"/>
+                                <!-- Triángulo de Equilibrio Argumentativo -->
+                                <polygon points="110,30 180,152 40,152" stroke="#F59E0B" stroke-width="3" fill="#1C1C26"/>
+                                <!-- Ejes de Conexión -->
+                                <line x1="110" y1="30" x2="110" y2="110" stroke="#F59E0B" stroke-width="2"/>
+                                <line x1="180" y1="152" x2="110" y2="110" stroke="#06B6D4" stroke-width="2"/>
+                                <line x1="40" y1="152" x2="110" y2="110" stroke="#F43F5E" stroke-width="2"/>
+                                <!-- Nodos Sólidos -->
+                                <circle cx="110" cy="30" r="8" fill="#F59E0B" stroke="#0B0B0F" stroke-width="2.5"/>
+                                <circle cx="180" cy="152" r="8" fill="#06B6D4" stroke="#0B0B0F" stroke-width="2.5"/>
+                                <circle cx="40" cy="152" r="8" fill="#F43F5E" stroke="#0B0B0F" stroke-width="2.5"/>
+                                <!-- Núcleo Central -->
+                                <circle cx="110" cy="110" r="16" fill="#14141B" stroke="#FFFFFF" stroke-width="2.5"/>
+                                <circle cx="110" cy="110" r="6" fill="#F59E0B"/>
+                            </svg>
+
+                            <p class="text-xs text-center text-zinc-400 font-medium leading-snug">
+                                Evidencia verificable + Respeto mutuo + Coherencia lógica
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Encabezado de Rutas de Aprendizaje -->
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-zinc-800 pb-4 mb-7 gap-2">
+                <div>
+                    <span class="font-bangers-title text-base tracking-widest uppercase text-electric">Rutas de Aprendizaje</span>
+                    <h2 class="font-bangers-title text-3xl sm:text-4xl text-white mt-0.5">Selecciona una sección para explorar</h2>
+                </div>
+                <p class="text-xs sm:text-sm text-zinc-400 font-medium">Cada módulo se despliega de forma exclusiva</p>
+            </div>
+
+            <!-- 3 Tarjetas Sólidas Interactivas para los Módulos -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tarjeta 1: Los 8 Elementos -->
+                <article onclick="navigateTo('elementos')" class="group cursor-pointer rounded-2xl bg-graphite border-2 border-zinc-800 hover:border-electric p-7 shadow-lg transition-all duration-200 flex flex-col justify-between relative overflow-hidden">
+                    <span class="font-bangers-title text-7xl text-zinc-800/70 group-hover:text-electric/20 transition-colors absolute top-3 right-5 select-none pointer-events-none">01</span>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-elevated border border-amber-500/40 text-electric flex items-center justify-center mb-5 group-hover:bg-electric group-hover:text-void transition-colors">
+                            <i data-lucide="layers" class="w-6 h-6"></i>
+                        </div>
+                        <span class="font-bangers-title text-sm tracking-widest uppercase text-electric">Sección 01</span>
+                        <h3 class="font-bangers-title text-2xl sm:text-3xl text-white mt-1 mb-3 tracking-wide">Los 8 Elementos</h3>
+                        <p class="text-sm text-zinc-300 leading-relaxed mb-6">
+                            Analiza en detalle la Introducción, Tesis, Premisas, Análisis, Síntesis, Conclusión, Recomendaciones y Talleres, junto con sus criterios éticos y ejemplos.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-electric">
+                        <span>Explorar elementos</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </article>
+
+                <!-- Tarjeta 2: Hilo Conductor -->
+                <article onclick="navigateTo('hilo')" class="group cursor-pointer rounded-2xl bg-graphite border-2 border-zinc-800 hover:border-neoncyan p-7 shadow-lg transition-all duration-200 flex flex-col justify-between relative overflow-hidden">
+                    <span class="font-bangers-title text-7xl text-zinc-800/70 group-hover:text-neoncyan/20 transition-colors absolute top-3 right-5 select-none pointer-events-none">02</span>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-elevated border border-cyan-500/40 text-neoncyan flex items-center justify-center mb-5 group-hover:bg-neoncyan group-hover:text-void transition-colors">
+                            <i data-lucide="file-text" class="w-6 h-6"></i>
+                        </div>
+                        <span class="font-bangers-title text-sm tracking-widest uppercase text-neoncyan">Sección 02</span>
+                        <h3 class="font-bangers-title text-2xl sm:text-3xl text-white mt-1 mb-3 tracking-wide">Hilo Conductor</h3>
+                        <p class="text-sm text-zinc-300 leading-relaxed mb-6">
+                            Lee un discurso argumentativo integrado donde cada frase está codificada por color. Haz clic en cualquier fragmento para inspeccionar su función ética.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-neoncyan">
+                        <span>Inspeccionar discurso</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </article>
+
+                <!-- Tarjeta 3: Taller Práctico -->
+                <article onclick="navigateTo('taller')" class="group cursor-pointer rounded-2xl bg-graphite border-2 border-zinc-800 hover:border-crimson p-7 shadow-lg transition-all duration-200 flex flex-col justify-between relative overflow-hidden">
+                    <span class="font-bangers-title text-7xl text-zinc-800/70 group-hover:text-crimson/20 transition-colors absolute top-3 right-5 select-none pointer-events-none">03</span>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-elevated border border-rose-500/40 text-crimson flex items-center justify-center mb-5 group-hover:bg-crimson group-hover:text-white transition-colors">
+                            <i data-lucide="award" class="w-6 h-6"></i>
+                        </div>
+                        <span class="font-bangers-title text-sm tracking-widest uppercase text-crimson">Sección 03</span>
+                        <h3 class="font-bangers-title text-2xl sm:text-3xl text-white mt-1 mb-3 tracking-wide">Taller Práctico</h3>
+                        <p class="text-sm text-zinc-300 leading-relaxed mb-6">
+                            Pon a prueba tu comprensión en un reto interactivo de 5 preguntas para identificar partes de un argumento y detectar falacias argumentativas.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-crimson">
+                        <span>Iniciar taller</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VISTA 2: LOS 8 ELEMENTOS                                  -->
+        <!-- ========================================================= -->
+        <section id="view-elementos" class="spa-view">
+            <!-- Cabecera con Numeración Gigante en Bangers -->
+            <div class="relative rounded-3xl bg-graphite border-2 border-zinc-800 p-6 sm:p-9 mb-8 overflow-hidden">
+                <div class="absolute top-0 inset-x-0 h-1.5 bg-electric"></div>
+                <span class="font-bangers-title text-8xl sm:text-9xl text-zinc-800/80 absolute -top-2 right-6 select-none pointer-events-none">01</span>
+
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+                    <div class="max-w-2xl">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-elevated border border-amber-500/40 text-electric font-bangers-title text-sm tracking-widest uppercase mb-3">
+                            <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                            Sección 01 de 03
+                        </span>
+                        <h2 class="font-bangers-title text-3xl sm:text-5xl text-white tracking-wide">
+                            Los 8 Elementos de la Argumentación Ética
+                        </h2>
+                        <p class="text-sm sm:text-base text-zinc-300 mt-2 leading-relaxed">
+                            Haz clic sobre cada elemento para desplegar su definición, función principal, criterios éticos y ejemplo práctico.
+                        </p>
+                    </div>
+
+                    <!-- Botones Expandir / Contraer Todo -->
+                    <div class="flex items-center gap-2.5 shrink-0">
+                        <button onclick="toggleAllAccordions(true)" class="px-4 py-2.5 rounded-xl bg-electric hover:bg-amber-400 text-void text-xs sm:text-sm font-bold transition-colors flex items-center gap-1.5 shadow-sm">
+                            <i data-lucide="chevrons-down" class="w-4 h-4"></i>
+                            Expandir todo
+                        </button>
+                        <button onclick="toggleAllAccordions(false)" class="px-4 py-2.5 rounded-xl bg-elevated hover:bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs sm:text-sm font-bold transition-colors flex items-center gap-1.5">
+                            <i data-lucide="chevrons-up" class="w-4 h-4"></i>
+                            Contraer todo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de Búsqueda Oscura Sólida -->
+            <div class="mb-6 relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </div>
+                <input type="text" id="elementSearch" oninput="filterElements()" placeholder="Buscar elemento, función, característica ética o ejemplo (ej. Tesis, falacias, evidencia)..." class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-graphite border-2 border-zinc-800 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-electric transition-colors">
+            </div>
+
+            <!-- Contenedor de Acordeones -->
+            <div id="elementsAccordionList" class="space-y-4"></div>
+
+            <!-- Mensaje sin resultados -->
+            <div id="noElementsFound" class="hidden text-center py-12 bg-graphite rounded-2xl border-2 border-zinc-800">
+                <i data-lucide="search-x" class="w-10 h-10 mx-auto text-zinc-500 mb-3"></i>
+                <p class="text-zinc-300 font-semibold">No se encontraron elementos que coincidan con tu búsqueda.</p>
+                <button onclick="document.getElementById('elementSearch').value=''; filterElements();" class="mt-3 text-xs font-bold uppercase tracking-wider text-electric underline">Limpiar búsqueda</button>
+            </div>
+
+            <!-- Navegación Inferior entre Vistas -->
+            <div class="mt-10 pt-6 border-t-2 border-zinc-800 flex items-center justify-between gap-4">
+                <button onclick="navigateTo('inicio')" class="px-5 py-3 rounded-xl bg-graphite border border-zinc-700 hover:border-zinc-500 text-zinc-200 text-sm font-bold transition-all flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    Anterior: Inicio
+                </button>
+                <button onclick="navigateTo('hilo')" class="px-5 py-3 rounded-xl bg-electric hover:bg-amber-400 text-void text-sm font-bold transition-all flex items-center gap-2">
+                    Siguiente: Hilo Conductor
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VISTA 3: HILO CONDUCTOR                                   -->
+        <!-- ========================================================= -->
+        <section id="view-hilo" class="spa-view">
+            <!-- Cabecera con Tipografía Bangers -->
+            <div class="relative rounded-3xl bg-graphite border-2 border-zinc-800 p-6 sm:p-9 mb-8 overflow-hidden">
+                <div class="absolute top-0 inset-x-0 h-1.5 bg-neoncyan"></div>
+                <span class="font-bangers-title text-8xl sm:text-9xl text-zinc-800/80 absolute -top-2 right-6 select-none pointer-events-none">02</span>
+
+                <div class="relative z-10 max-w-3xl">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-elevated border border-cyan-500/40 text-neoncyan font-bangers-title text-sm tracking-widest uppercase mb-3">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                        Sección 02 de 03
+                    </span>
+                    <h2 class="font-bangers-title text-3xl sm:text-5xl text-white tracking-wide">
+                        El Hilo Conductor: Anatomía de un Discurso Ético
+                    </h2>
+                    <p class="text-sm sm:text-base text-zinc-300 mt-2 leading-relaxed">
+                        Observa cómo los 8 elementos trabajan juntos en un texto coherente. <strong class="text-electric font-bold">Haz clic en cualquier fragmento resaltado</strong> para analizar su función en el inspector lateral.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Leyenda Rápida de Botones por Elemento -->
+            <div id="discourseLegend" class="flex flex-wrap gap-2 mb-6"></div>
+
+            <!-- Grid Principal: Discurso a la izquierda + Inspector Lateral fijo a la derecha -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Texto del Discurso -->
+                <div class="lg:col-span-7 bg-graphite rounded-2xl border-2 border-zinc-800 p-6 sm:p-8 shadow-lg">
+                    <div class="flex items-center justify-between pb-4 mb-5 border-b border-zinc-800">
+                        <span class="font-mono text-xs font-bold uppercase tracking-wider text-zinc-400">Discurso Modelo Integrado</span>
+                        <span class="text-xs font-bold text-neoncyan flex items-center gap-1.5">
+                            <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i>
+                            Toca un segmento
+                        </span>
+                    </div>
+                    <div id="discourseTextContainer" class="space-y-4 text-base sm:text-lg leading-[1.85] text-zinc-200"></div>
+                </div>
+
+                <!-- Panel Inspector Lateral Fijo -->
+                <aside class="lg:col-span-5 lg:sticky lg:top-24 bg-graphite rounded-2xl border-2 border-electric/60 p-6 sm:p-7 shadow-[0_12px_35px_rgba(0,0,0,0.65)]">
+                    <div class="flex items-center justify-between pb-3 mb-4 border-b border-zinc-800">
+                        <div class="flex items-center gap-2 font-bangers-title text-base tracking-widest uppercase text-electric">
+                            <i data-lucide="microscope" class="w-4 h-4"></i>
+                            Inspector Estructural y Ético
+                        </div>
+                        <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-elevated text-zinc-400">EN VIVO</span>
+                    </div>
+                    <div id="inspectorContent"></div>
+                </aside>
+            </div>
+
+            <!-- Navegación Inferior entre Vistas -->
+            <div class="mt-10 pt-6 border-t-2 border-zinc-800 flex items-center justify-between gap-4">
+                <button onclick="navigateTo('elementos')" class="px-5 py-3 rounded-xl bg-graphite border border-zinc-700 hover:border-zinc-500 text-zinc-200 text-sm font-bold transition-all flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    Anterior: Los 8 Elementos
+                </button>
+                <button onclick="navigateTo('taller')" class="px-5 py-3 rounded-xl bg-electric hover:bg-amber-400 text-void text-sm font-bold transition-all flex items-center gap-2">
+                    Siguiente: Taller Práctico
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VISTA 4: TALLER PRÁCTICO                                  -->
+        <!-- ========================================================= -->
+        <section id="view-taller" class="spa-view">
+            <!-- Cabecera con Tipografía Bangers -->
+            <div class="relative rounded-3xl bg-graphite border-2 border-zinc-800 p-6 sm:p-9 mb-8 overflow-hidden">
+                <div class="absolute top-0 inset-x-0 h-1.5 bg-crimson"></div>
+                <span class="font-bangers-title text-8xl sm:text-9xl text-zinc-800/80 absolute -top-2 right-6 select-none pointer-events-none">03</span>
+
+                <div class="relative z-10 max-w-3xl">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-elevated border border-rose-500/40 text-crimson font-bangers-title text-sm tracking-widest uppercase mb-3">
+                        <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                        Sección 03 de 03
+                    </span>
+                    <h2 class="font-bangers-title text-3xl sm:text-5xl text-white tracking-wide">
+                        Taller Práctico de Debate Ético
+                    </h2>
+                    <p class="text-sm sm:text-base text-zinc-300 mt-2 leading-relaxed">
+                        Resuelve estos 5 ejercicios interactivos para identificar cada elemento argumentativo y detectar falacias o manipulaciones.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Contenedor del Quiz Sólido -->
+            <div class="max-w-3xl mx-auto bg-graphite rounded-2xl border-2 border-zinc-800 p-6 sm:p-9 shadow-xl">
+                <!-- Barra de Progreso -->
+                <div id="quizHeader" class="mb-6">
+                    <div class="flex items-center justify-between font-mono text-xs sm:text-sm font-bold text-zinc-300 mb-2.5">
+                        <span id="quizStepLabel">PREGUNTA 1 DE 5</span>
+                        <span id="quizScoreLabel" class="text-electric">ACIERTOS: 0</span>
+                    </div>
+                    <div class="w-full h-3 bg-void rounded-full overflow-hidden border border-zinc-800">
+                        <div id="quizProgressBar" class="h-full bg-gradient-to-r from-electric via-crimson to-neoncyan transition-all duration-500" style="width: 20%;"></div>
+                    </div>
+                </div>
+
+                <!-- Área de Pregunta Activa -->
+                <div id="quizBody"></div>
+
+                <!-- Pantalla Final de Resultados -->
+                <div id="quizResults" class="hidden text-center py-6"></div>
+            </div>
+
+            <!-- Navegación Inferior entre Vistas -->
+            <div class="mt-10 pt-6 border-t-2 border-zinc-800 flex items-center justify-between gap-4">
+                <button onclick="navigateTo('hilo')" class="px-5 py-3 rounded-xl bg-graphite border border-zinc-700 hover:border-zinc-500 text-zinc-200 text-sm font-bold transition-all flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    Anterior: Hilo Conductor
+                </button>
+                <button onclick="navigateTo('inicio')" class="px-5 py-3 rounded-xl bg-elevated hover:bg-zinc-800 border border-zinc-700 text-white text-sm font-bold transition-all flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4 text-electric"></i>
+                    Volver al Inicio
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- PIE DE PÁGINA OSCURO SÓLIDO                                           -->
+    <!-- ===================================================================== -->
+    <footer class="border-t-2 border-zinc-800 bg-graphite py-6 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400">
+            <div class="flex items-center gap-2">
+                <span class="font-bangers-title text-lg text-electric tracking-wider">ÉticaArgumenta</span>
+                <span>— Guía Interactiva sobre Argumentación Responsable y Ética</span>
+            </div>
+            <p class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">Pensamiento Crítico • Diálogo Democrático • Rigor Lógico</p>
+        </div>
+    </footer>
+
+    <script>
+        // =========================================================================
+        // 1. BASE DE DATOS COMPLETA DE LOS 8 ELEMENTOS (ATMOSFERA OSCURA / NEÓN)
+        // =========================================================================
+        const ELEMENTS_DATA = [
+            {
+                id: 'introduccion',
+                number: '01',
+                name: 'Introducción',
+                icon: 'compass',
+                colorClass: 'bg-sky-950 text-sky-200 border-sky-500',
+                badgeClass: 'bg-sky-950 text-sky-300 border-sky-700',
+                whatIs: 'Presentación del tema y del contexto en el que se desarrolla la discusión.',
+                mainFunction: 'Captar la atención e indicar con transparencia de qué se va a hablar.',
+                ethicalTraits: 'Clara, objetiva y sin manipulación emocional ni alarmismo.',
+                shortExample: '“Hoy analizaremos la importancia de argumentar con ética…”',
+                discourseFragment: 'Hoy analizaremos la importancia de argumentar con ética en nuestras conversaciones cotidianas y espacios públicos, frente al auge de la desinformación digital.',
+                inspectorNote: 'Presenta el tema con claridad y sitúa el contexto actual sin recurrir al alarmismo ni atacar a ningún grupo.'
+            },
+            {
+                id: 'tesis',
+                number: '02',
+                name: 'Tesis',
+                icon: 'target',
+                colorClass: 'bg-amber-950 text-amber-200 border-amber-500',
+                badgeClass: 'bg-amber-950 text-amber-300 border-amber-700',
+                whatIs: 'La postura o idea principal que se defiende a lo largo de toda la intervención.',
+                mainFunction: 'Orientar todo el texto o discurso con una proposición central.',
+                ethicalTraits: 'Clara, precisa, defendible y respetuosa con otras opiniones.',
+                shortExample: '“La argumentación ética fortalece el diálogo democrático”.',
+                discourseFragment: 'Sostenemos que la argumentación ética fortalece el diálogo democrático y construye acuerdos duraderos en sociedades plurales.',
+                inspectorNote: 'Formula una postura precisa y debatible con respeto, marcando el rumbo lógico de todo el discurso.'
+            },
+            {
+                id: 'premisas',
+                number: '03',
+                name: 'Premisas',
+                icon: 'check-circle-2',
+                colorClass: 'bg-emerald-950 text-emerald-200 border-emerald-500',
+                badgeClass: 'bg-emerald-950 text-emerald-300 border-emerald-700',
+                whatIs: 'Afirmaciones, datos comprobables y evidencias que respaldan la tesis.',
+                mainFunction: 'Proporcionar sustento objetivo, verificable y sólido a la postura.',
+                ethicalTraits: 'Veraces, provenientes de fuentes confiables y citadas sin sesgos.',
+                shortExample: '“Estudios en comunicación demuestran que verificar fuentes reduce en un 40 % la hostilidad”.',
+                discourseFragment: 'En primer lugar, investigaciones en comunicación política demuestran que las comunidades que verifican sus fuentes reducen en un 40 % la hostilidad en sus debates; además, la transparencia de datos facilita el consenso.',
+                inspectorNote: 'Aporta pruebas empíricas verificables y cita su origen sin distorsionar cifras ni ocultar contexto.'
+            },
+            {
+                id: 'analisis',
+                number: '04',
+                name: 'Análisis',
+                icon: 'microscope',
+                colorClass: 'bg-cyan-950 text-cyan-200 border-cyan-500',
+                badgeClass: 'bg-cyan-950 text-cyan-300 border-cyan-700',
+                whatIs: 'Examen razonado que vincula las premisas con la tesis y evalúa objeciones.',
+                mainFunction: 'Explicar cómo y por qué las evidencias prueban la postura, ponderando contraargumentos.',
+                ethicalTraits: 'Riguroso, libre de falacias y justo al representar posturas contrarias (principio de caridad).',
+                shortExample: '“Aunque exigir rigor vuelve más lento el debate, esa pausa evita errores colectivos”.',
+                discourseFragment: 'Si bien algunos críticos señalan que exigir rigor probatorio puede volver más lento el intercambio público, esa pausa reflexiva resulta indispensable para distinguir hechos comprobados de rumores virales.',
+                inspectorNote: 'Aplica el principio de caridad interpretativa: reconoce una objeción legítima y la responde con razonamiento lógico.'
+            },
+            {
+                id: 'sintesis',
+                number: '05',
+                name: 'Síntesis',
+                icon: 'git-merge',
+                colorClass: 'bg-violet-950 text-violet-200 border-violet-500',
+                badgeClass: 'bg-violet-950 text-violet-300 border-violet-700',
+                whatIs: 'Integración ordenada de los argumentos, datos y objeciones ya examinados.',
+                mainFunction: 'Condensar el recorrido lógico mostrando cómo convergen todas las razones.',
+                ethicalTraits: 'Fiel a lo expuesto, equilibrada y sin exagerar el alcance de los hallazgos.',
+                shortExample: '“Al articular evidencias contrastadas con escucha abierta, el desacuerdo genera aprendizaje”.',
+                discourseFragment: 'De este modo, al articular evidencias contrastadas con una escucha abierta a las objeciones, el desacuerdo deja de ser una amenaza y se convierte en una fuente de comprensión mutua.',
+                inspectorNote: 'Reúne los puntos clave con fidelidad y mesura, preparando el cierre lógico del discurso.'
+            },
+            {
+                id: 'conclusion',
+                number: '06',
+                name: 'Conclusión',
+                icon: 'flag',
+                colorClass: 'bg-rose-950 text-rose-200 border-rose-500',
+                badgeClass: 'bg-rose-950 text-rose-300 border-rose-700',
+                whatIs: 'Cierre lógico que reafirma la tesis a partir de las premisas demostradas.',
+                mainFunction: 'Consolidar la validez de la postura final y dejar una idea rectora clara.',
+                ethicalTraits: 'Coherente con las pruebas presentadas (sin saltos lógicos) y abierta al diálogo.',
+                shortExample: '“Por consiguiente, cultivar una argumentación responsable preserva la confianza ciudadana”.',
+                discourseFragment: 'Por consiguiente, cultivar una argumentación responsable no es un mero ejercicio académico, sino una condición indispensable para preservar la confianza ciudadana.',
+                inspectorNote: 'Se desprende directamente de las premisas sin exagerar lo demostrado ni cerrar el diálogo futuro.'
+            },
+            {
+                id: 'recomendaciones',
+                number: '07',
+                name: 'Recomendaciones',
+                icon: 'lightbulb',
+                colorClass: 'bg-teal-950 text-teal-200 border-teal-500',
+                badgeClass: 'bg-teal-950 text-teal-300 border-teal-700',
+                whatIs: 'Propuestas concretas de acción o hábitos derivados de las conclusiones.',
+                mainFunction: 'Trasladar la reflexión hacia prácticas aplicables y constructivas.',
+                ethicalTraits: 'Viables, respetuosas de la autonomía ajena y orientadas al bien común.',
+                shortExample: '“Recomendamos verificar siempre la fuente primaria antes de compartir información”.',
+                discourseFragment: 'Para llevar este principio a la práctica, recomendamos verificar siempre la fuente primaria antes de compartir información y reformular con respeto el argumento del interlocutor antes de refutarlo.',
+                inspectorNote: 'Sugiere acciones concretas y realizables que respetan la libertad del interlocutor sin imposiciones.'
+            },
+            {
+                id: 'talleres',
+                number: '08',
+                name: 'Talleres o espacios de diálogo',
+                icon: 'users',
+                colorClass: 'bg-fuchsia-950 text-fuchsia-200 border-fuchsia-500',
+                badgeClass: 'bg-fuchsia-950 text-fuchsia-300 border-fuchsia-700',
+                whatIs: 'Espacios participativos de práctica deliberativa, simulación de debates y retroalimentación.',
+                mainFunction: 'Desarrollar habilidades argumentativas éticas mediante el ejercicio colaborativo.',
+                ethicalTraits: 'Inclusivos, horizontales, seguros para el aprendizaje y respetuosos de la diversidad.',
+                shortExample: '“Implementar talleres periódicos de debate deliberativo en aulas y comunidades”.',
+                discourseFragment: 'Finalmente, invitamos a instituciones educativas y colectivos vecinales a implementar talleres periódicos de debate deliberativo donde ejercitemos estas herramientas de manera colaborativa.',
+                inspectorNote: 'Cierra el ciclo llevando la argumentación ética a la práctica comunitaria inclusiva y participativa.'
+            }
+        ];
+
+        // =========================================================================
+        // 2. PREGUNTAS DEL TALLER PRÁCTICO (5 CASOS)
+        // =========================================================================
+        const QUIZ_QUESTIONS = [
+            {
+                context: 'Fragmento en un foro universitario:',
+                quote: '“El 78 % de los municipios que implementaron presupuestos participativos aumentaron su transparencia fiscal en dos años, según el Observatorio Cívico.”',
+                question: '¿A qué elemento de la estructura argumentativa corresponde este enunciado?',
+                options: [
+                    'Introducción contextual',
+                    'Premisa basada en evidencia verificable',
+                    'Recomendación práctica',
+                    'Conclusión final'
+                ],
+                correctIndex: 1,
+                explanation: '¡Exacto! Aporta un dato comprobable y con fuente identificada que sirve como respaldo objetivo para sostener una tesis.'
+            },
+            {
+                context: 'Intervención en un debate sobre movilidad urbana:',
+                quote: '“No debemos escuchar la propuesta de ciclovías del concejal porque él ni siquiera sabe conducir un automóvil y siempre llega tarde.”',
+                question: '¿Qué falla ética y lógica invalida este argumento?',
+                options: [
+                    'Falacia Ad Hominem (ataque personal en lugar de refutar la idea)',
+                    'Exceso de síntesis documental',
+                    'Falta de recomendaciones viables',
+                    'Uso excesivo de fuentes estadísticas'
+                ],
+                correctIndex: 0,
+                explanation: 'Correcto. La falacia Ad Hominem descalifica a la persona en vez de analizar los méritos o evidencias de su propuesta.'
+            },
+            {
+                context: 'Criterio ético en el elemento “Análisis”:',
+                quote: 'Antes de refutar la postura contraria, un argumentador ético la resume con precisión y en su versión más sólida.',
+                question: '¿Cómo se denomina este principio fundamental de la ética argumentativa?',
+                options: [
+                    'Apelación a la autoridad',
+                    'Principio de caridad interpretativa',
+                    'Generalización apresurada',
+                    'Circularidad lógica'
+                ],
+                correctIndex: 1,
+                explanation: '¡Muy bien! El principio de caridad exige interpretar el argumento del interlocutor de la forma más justa y racional posible antes de criticarlo.'
+            },
+            {
+                context: 'Enunciado central de un ensayo ciudadano:',
+                quote: '“La alfabetización mediática debe integrarse como asignatura transversal en secundaria para fortalecer la resiliencia democrática frente a la desinformación.”',
+                question: '¿Qué papel cumple esta oración dentro de la estructura del discurso?',
+                options: [
+                    'Tesis (postura principal precisa y defendible)',
+                    'Taller o espacio de diálogo',
+                    'Síntesis de objeciones',
+                    'Anécdota introductoria'
+                ],
+                correctIndex: 0,
+                explanation: 'Acertaste. Expresa de manera clara, respetuosa y debatible la idea central que todo el ensayo deberá demostrar.'
+            },
+            {
+                context: 'Evaluación de una conclusión responsable:',
+                quote: 'En un estudio realizado únicamente en tres bibliotecas de una ciudad, el autor concluye: “Queda demostrado sin lugar a dudas que toda la humanidad ha dejado de leer libros”.',
+                question: '¿Qué requisito ético de la conclusión se está vulnerando?',
+                options: [
+                    'La conclusión debe incluir un saludo cordial',
+                    'La conclusión debe ser coherente con el alcance real de las premisas, sin exagerar lo probado',
+                    'La conclusión debe introducir un tema completamente nuevo',
+                    'La conclusión debe evitar mencionar la tesis'
+                ],
+                correctIndex: 1,
+                explanation: '¡Excelente diagnóstico! Éticamente, una conclusión no puede afirmar más de lo que sus premisas realmente respaldan (falacia de generalización apresurada).'
+            }
+        ];
+
+        // =========================================================================
+        // 3. NAVEGACIÓN EXCLUSIVA ENTRE LAS 4 VISTAS SPA
+        // =========================================================================
+        let activeView = 'inicio';
+        let activeDiscourseId = ELEMENTS_DATA[0].id;
+        let currentQuestionIdx = 0;
+        let quizScore = 0;
+        let questionAnswered = false;
+
+        function navigateTo(viewId) {
+            activeView = viewId;
+
+            document.querySelectorAll('.spa-view').forEach(section => {
+                section.classList.remove('active-view');
+            });
+
+            const target = document.getElementById(`view-${viewId}`);
+            if (target) {
+                target.classList.add('active-view');
+            }
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                const isTarget = btn.getAttribute('data-nav') === viewId;
+                if (isTarget) {
+                    btn.classList.add('bg-electric', 'text-void', 'shadow-sm');
+                    btn.classList.remove('text-zinc-300', 'hover:bg-elevated', 'hover:text-white');
+                } else {
+                    btn.classList.remove('bg-electric', 'text-void', 'shadow-sm');
+                    btn.classList.add('text-zinc-300', 'hover:bg-elevated', 'hover:text-white');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // =========================================================================
+        // 4. VISTA 2: RENDERIZADO DE ACORDEONES DE LOS 8 ELEMENTOS
+        // =========================================================================
+        function renderElementsAccordion(items) {
+            const container = document.getElementById('elementsAccordionList');
+            const emptyState = document.getElementById('noElementsFound');
+
+            if (!items.length) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            container.innerHTML = items.map((el, index) => `
+                <article class="rounded-2xl bg-graphite border-2 border-zinc-800 hover:border-zinc-700 overflow-hidden shadow-md transition-colors">
+                    <button onclick="toggleSingleAccordion('${el.id}')" class="w-full px-5 sm:px-7 py-5 flex items-center justify-between gap-4 text-left focus:outline-none group">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bangers-title text-lg sm:text-xl px-3 py-1 rounded-lg border-2 ${el.colorClass} tracking-wider">
+                                ${el.number}
+                            </span>
+                            <div>
+                                <h3 class="font-bangers-title text-2xl sm:text-3xl text-white group-hover:text-electric transition-colors tracking-wide">
+                                    ${el.name}
+                                </h3>
+                                <p class="text-xs sm:text-sm text-zinc-400 line-clamp-1 mt-0.5">
+                                    ${el.whatIs}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-9 h-9 rounded-xl bg-elevated border border-zinc-700 flex items-center justify-center text-zinc-300 group-hover:border-electric group-hover:text-electric shrink-0 transition-colors">
+                            <i data-lucide="chevron-down" id="chev-${el.id}" class="w-4 h-4 chevron-icon ${index === 0 ? 'rotated' : ''}"></i>
+                        </div>
+                    </button>
+
+                    <div id="acc-${el.id}" class="accordion-content ${index === 0 ? 'open' : ''}">
+                        <div class="px-5 sm:px-7 pb-6 pt-4 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-2 gap-4 bg-void/40">
+                            <div class="p-4 rounded-xl bg-elevated border border-zinc-800">
+                                <span class="font-bangers-title text-xs tracking-widest uppercase text-zinc-400 block mb-1">¿Qué es?</span>
+                                <p class="text-sm text-zinc-200 leading-relaxed">${el.whatIs}</p>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-elevated border border-zinc-800">
+                                <span class="font-bangers-title text-xs tracking-widest uppercase text-neoncyan block mb-1">Función Principal</span>
+                                <p class="text-sm text-zinc-200 leading-relaxed">${el.mainFunction}</p>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-emerald-950/70 border border-emerald-700/70">
+                                <span class="font-bangers-title text-xs tracking-widest uppercase text-emerald-400 flex items-center gap-1.5 mb-1">
+                                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                                    Criterio Ético
+                                </span>
+                                <p class="text-sm text-zinc-100 leading-relaxed">${el.ethicalTraits}</p>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-amber-950/60 border border-amber-600/60">
+                                <span class="font-bangers-title text-xs tracking-widest uppercase text-electric flex items-center gap-1.5 mb-1">
+                                    <i data-lucide="quote" class="w-3.5 h-3.5"></i>
+                                    Ejemplo Práctico
+                                </span>
+                                <p class="text-sm italic text-amber-100 leading-relaxed">${el.shortExample}</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function toggleSingleAccordion(id) {
+            const content = document.getElementById(`acc-${id}`);
+            const chevron = document.getElementById(`chev-${id}`);
+            if (!content) return;
+            content.classList.toggle('open');
+            if (chevron) chevron.classList.toggle('rotated');
+        }
+
+        function toggleAllAccordions(expand) {
+            document.querySelectorAll('.accordion-content').forEach(el => {
+                el.classList.toggle('open', expand);
+            });
+            document.querySelectorAll('.chevron-icon').forEach(icon => {
+                icon.classList.toggle('rotated', expand);
+            });
+        }
+
+        function filterElements() {
+            const query = document.getElementById('elementSearch').value.toLowerCase().trim();
+            const filtered = ELEMENTS_DATA.filter(el =>
+                el.name.toLowerCase().includes(query) ||
+                el.whatIs.toLowerCase().includes(query) ||
+                el.mainFunction.toLowerCase().includes(query) ||
+                el.ethicalTraits.toLowerCase().includes(query) ||
+                el.shortExample.toLowerCase().includes(query)
+            );
+            renderElementsAccordion(filtered);
+            if (query.length > 0) toggleAllAccordions(true);
+        }
+
+        // =========================================================================
+        // 5. VISTA 3: HILO CONDUCTOR E INSPECTOR LATERAL
+        // =========================================================================
+        function renderDiscourseSection() {
+            const legendContainer = document.getElementById('discourseLegend');
+            const textContainer = document.getElementById('discourseTextContainer');
+
+            legendContainer.innerHTML = ELEMENTS_DATA.map(el => `
+                <button onclick="selectDiscourseSegment('${el.id}')" id="legend-${el.id}" class="px-3 py-1.5 rounded-lg text-xs font-bold border transition-all flex items-center gap-1.5 ${el.badgeClass} hover:brightness-125">
+                    <span class="font-bangers-title text-sm tracking-wider">${el.number}</span>
+                    ${el.name}
+                </button>
+            `).join('');
+
+            const paragraphs = [
+                ['introduccion', 'tesis'],
+                ['premisas', 'analisis'],
+                ['sintesis', 'conclusion'],
+                ['recomendaciones', 'talleres']
+            ];
+
+            textContainer.innerHTML = paragraphs.map(group => {
+                const spans = group.map(id => {
+                    const el = ELEMENTS_DATA.find(item => item.id === id);
+                    return `<span id="seg-${el.id}" onclick="selectDiscourseSegment('${el.id}')" class="discourse-segment ${el.colorClass}" title="Haz clic para inspeccionar: ${el.name}">${el.discourseFragment}</span>`;
+                }).join(' ');
+                return `<p>${spans}</p>`;
+            }).join('');
+
+            selectDiscourseSegment(activeDiscourseId);
+        }
+
+        function selectDiscourseSegment(id) {
+            activeDiscourseId = id;
+            const el = ELEMENTS_DATA.find(item => item.id === id) || ELEMENTS_DATA[0];
+
+            document.querySelectorAll('.discourse-segment').forEach(seg => {
+                seg.classList.remove('active-segment');
+            });
+            const activeSeg = document.getElementById(`seg-${id}`);
+            if (activeSeg) activeSeg.classList.add('active-segment');
+
+            ELEMENTS_DATA.forEach(item => {
+                const btn = document.getElementById(`legend-${item.id}`);
+                if (btn) {
+                    btn.classList.toggle('ring-2', item.id === id);
+                    btn.classList.toggle('ring-electric', item.id === id);
+                }
+            });
+
+            const inspector = document.getElementById('inspectorContent');
+            inspector.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="font-bangers-title text-sm tracking-widest px-3 py-1 rounded-lg border ${el.colorClass}">
+                            ELEMENTO ${el.number}
+                        </span>
+                        <span class="font-mono text-xs text-zinc-400">
+                            ${ELEMENTS_DATA.findIndex(x => x.id === id) + 1} / 8
+                        </span>
+                    </div>
+
+                    <h3 class="font-bangers-title text-3xl sm:text-4xl text-white tracking-wide">
+                        ${el.name}
+                    </h3>
+
+                    <div class="p-4 rounded-xl bg-elevated border border-zinc-800">
+                        <span class="font-bangers-title text-xs tracking-widest uppercase text-neoncyan block mb-1">Función Estructural</span>
+                        <p class="text-sm text-zinc-200 leading-relaxed">${el.mainFunction}</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-emerald-950/60 border border-emerald-700/70">
+                        <span class="font-bangers-title text-xs tracking-widest uppercase text-emerald-400 block mb-1">Auditoría Ética del Fragmento</span>
+                        <p class="text-sm text-zinc-100 leading-relaxed">${el.inspectorNote}</p>
+                    </div>
+
+                    <div class="pt-2 flex items-center justify-between gap-2">
+                        <button onclick="stepDiscourse(-1)" class="px-3.5 py-2 rounded-xl bg-elevated border border-zinc-700 text-xs font-bold text-zinc-200 hover:border-electric transition-colors flex items-center gap-1">
+                            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                            Anterior
+                        </button>
+                        <button onclick="stepDiscourse(1)" class="px-4 py-2 rounded-xl bg-electric hover:bg-amber-400 text-void text-xs font-bold transition-colors flex items-center gap-1">
+                            Siguiente pieza
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            lucide.createIcons();
+        }
+
+        function stepDiscourse(delta) {
+            const idx = ELEMENTS_DATA.findIndex(item => item.id === activeDiscourseId);
+            const nextIdx = (idx + delta + ELEMENTS_DATA.length) % ELEMENTS_DATA.length;
+            selectDiscourseSegment(ELEMENTS_DATA[nextIdx].id);
+        }
+
+        // =========================================================================
+        // 6. VISTA 4: TALLER PRÁCTICO (QUIZ INTERACTIVO DE 5 PREGUNTAS)
+        // =========================================================================
+        function renderQuizQuestion() {
+            const q = QUIZ_QUESTIONS[currentQuestionIdx];
+            questionAnswered = false;
+
+            document.getElementById('quizHeader').classList.remove('hidden');
+            document.getElementById('quizResults').classList.add('hidden');
+            document.getElementById('quizBody').classList.remove('hidden');
+
+            document.getElementById('quizStepLabel').textContent = `PREGUNTA ${currentQuestionIdx + 1} DE ${QUIZ_QUESTIONS.length}`;
+            document.getElementById('quizScoreLabel').textContent = `ACIERTOS: ${quizScore}`;
+            document.getElementById('quizProgressBar').style.width = `${((currentQuestionIdx + 1) / QUIZ_QUESTIONS.length) * 100}%`;
+
+            const body = document.getElementById('quizBody');
+            body.innerHTML = `
+                <div class="mb-6">
+                    <span class="font-mono text-xs uppercase tracking-wider text-neoncyan font-bold block mb-2">${q.context}</span>
+                    <blockquote class="p-5 rounded-xl bg-void border-l-4 border-electric text-base sm:text-lg italic text-zinc-200 leading-relaxed mb-5">
+                        ${q.quote}
+                    </blockquote>
+                    <h3 class="text-lg sm:text-xl font-bold text-white leading-snug">
+                        ${q.question}
+                    </h3>
+                </div>
+
+                <div class="space-y-3" id="quizOptionsContainer">
+                    ${q.options.map((opt, idx) => `
+                        <button onclick="handleQuizAnswer(${idx})" id="opt-btn-${idx}" class="w-full text-left p-4 rounded-xl bg-elevated border-2 border-zinc-800 hover:border-electric transition-all flex items-start gap-3.5 group">
+                            <span class="font-bangers-title text-base w-7 h-7 rounded-lg bg-void border border-zinc-700 text-electric flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-electric group-hover:text-void group-hover:border-electric transition-colors">
+                                ${String.fromCharCode(65 + idx)}
+                            </span>
+                            <span class="text-sm sm:text-base font-medium text-zinc-200">${opt}</span>
+                        </button>
+                    `).join('')}
+                </div>
+
+                <div id="quizFeedback" class="hidden mt-6 p-5 rounded-xl border-2"></div>
+            `;
+        }
+
+        function handleQuizAnswer(selectedIdx) {
+            if (questionAnswered) return;
+            questionAnswered = true;
+
+            const q = QUIZ_QUESTIONS[currentQuestionIdx];
+            const isCorrect = selectedIdx === q.correctIndex;
+            if (isCorrect) quizScore++;
+
+            document.getElementById('quizScoreLabel').textContent = `ACIERTOS: ${quizScore}`;
+
+            q.options.forEach((_, idx) => {
+                const btn = document.getElementById(`opt-btn-${idx}`);
+                btn.disabled = true;
+                btn.classList.remove('hover:border-electric');
+
+                if (idx === q.correctIndex) {
+                    btn.classList.add('bg-emerald-950', 'border-emerald-500');
+                } else if (idx === selectedIdx && !isCorrect) {
+                    btn.classList.add('bg-rose-950', 'border-crimson');
+                } else {
+                    btn.classList.add('opacity-50');
+                }
+            });
+
+            const feedback = document.getElementById('quizFeedback');
+            feedback.classList.remove('hidden');
+            feedback.className = `mt-6 p-5 rounded-xl border-2 ${
+                isCorrect
+                    ? 'bg-emerald-950/90 border-emerald-500 text-emerald-100'
+                    : 'bg-rose-950/90 border-crimson text-rose-100'
+            }`;
+
+            const isLast = currentQuestionIdx === QUIZ_QUESTIONS.length - 1;
+            feedback.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <i data-lucide="${isCorrect ? 'check-circle-2' : 'alert-triangle'}" class="w-5 h-5 shrink-0 mt-0.5 ${isCorrect ? 'text-emerald-400' : 'text-crimson'}"></i>
+                    <div class="flex-grow">
+                        <p class="font-bangers-title text-lg tracking-wider mb-1 ${isCorrect ? 'text-emerald-300' : 'text-rose-300'}">
+                            ${isCorrect ? '¡Diagnóstico Correcto!' : 'Observación Crítica'}
+                        </p>
+                        <p class="text-sm leading-relaxed text-zinc-200">${q.explanation}</p>
+                        <button onclick="${isLast ? 'showQuizResults()' : 'nextQuizQuestion()'}" class="mt-4 px-5 py-2.5 rounded-xl bg-electric hover:bg-amber-400 text-void text-xs font-bold uppercase tracking-wider transition-colors inline-flex items-center gap-2">
+                            ${isLast ? 'Ver Resultados Finales' : 'Siguiente Pregunta'}
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            lucide.createIcons();
+        }
+
+        function nextQuizQuestion() {
+            currentQuestionIdx++;
+            renderQuizQuestion();
+        }
+
+        function showQuizResults() {
+            document.getElementById('quizHeader').classList.add('hidden');
+            document.getElementById('quizBody').classList.add('hidden');
+
+            const results = document.getElementById('quizResults');
+            results.classList.remove('hidden');
+
+            const percentage = Math.round((quizScore / QUIZ_QUESTIONS.length) * 100);
+            let verdict = 'Orador Ético Consolidado';
+            let summary = 'Dominas la arquitectura de la argumentación responsable y detectas con agudeza las falacias que erosionan el diálogo.';
+
+            if (quizScore <= 2) {
+                verdict = 'Aprendiz de Retórica Crítica';
+                summary = 'Te recomendamos repasar las fichas de Los 8 Elementos y el Hilo Conductor para afianzar la distinción entre evidencia y falacia.';
+            } else if (quizScore <= 4) {
+                verdict = 'Argumentador Reflexivo';
+                summary = 'Posees un sólido criterio ético y estructural. Un breve repaso al análisis de objeciones perfeccionará tu desempeño.';
+            }
+
+            results.innerHTML = `
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-elevated border-2 border-electric text-electric mb-4">
+                    <i data-lucide="award" class="w-8 h-8"></i>
+                </div>
+                <span class="font-mono text-xs uppercase tracking-widest text-neoncyan block">Resultado del Taller</span>
+                <h3 class="font-bangers-title text-4xl sm:text-5xl text-white mt-1 mb-2 tracking-wide">${verdict}</h3>
+                <p class="font-bangers-title text-2xl text-electric tracking-wider mb-4">
+                    ${quizScore} de ${QUIZ_QUESTIONS.length} aciertos (${percentage}%)
+                </p>
+                <p class="text-sm sm:text-base text-zinc-300 max-w-lg mx-auto mb-8 leading-relaxed">
+                    ${summary}
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button onclick="resetQuiz()" class="px-6 py-3 rounded-xl bg-electric hover:bg-amber-400 text-void text-sm font-bold transition-colors flex items-center gap-2">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        Repetir Taller
+                    </button>
+                    <button onclick="navigateTo('elementos')" class="px-6 py-3 rounded-xl bg-elevated hover:bg-zinc-800 border border-zinc-700 text-white text-sm font-bold transition-colors">
+                        Repasar los 8 Elementos
+                    </button>
+                </div>
+            `;
+
+            lucide.createIcons();
+        }
+
+        function resetQuiz() {
+            currentQuestionIdx = 0;
+            quizScore = 0;
+            renderQuizQuestion();
+        }
+
+        // =========================================================================
+        // 7. INICIALIZACIÓN AL CARGAR EL DOCUMENTO
+        // =========================================================================
+        window.addEventListener('DOMContentLoaded', () => {
+            renderElementsAccordion(ELEMENTS_DATA);
+            renderDiscourseSection();
+            renderQuizQuestion();
+            navigateTo('inicio');
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
